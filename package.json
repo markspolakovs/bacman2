@@ -1,0 +1,71 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@microsoft/microsoft-graph-client": "^1.7.0",
+    "@microsoft/microsoft-graph-types": "^1.10.0",
+    "@types/amplitude-js": "^4.4.4",
+    "@types/animejs": "^2.0.2",
+    "@types/jest": "^24.0.13",
+    "@types/lodash": "^4.14.136",
+    "@types/mixpanel-browser": "^2.23.1",
+    "@types/node": "^12.0.7",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-modal": "^3.8.2",
+    "@types/react-redux": "^7.1.1",
+    "@types/react-transition-group": "^2.9.2",
+    "@types/redux-devtools-extension": "^2.13.2",
+    "amplitude-js": "^5.3.1",
+    "animejs": "^3.0.1",
+    "firebase": "^6.1.1",
+    "lodash": "^4.17.14",
+    "mixpanel-browser": "^2.29.1",
+    "msal": "^1.0.2",
+    "node-sass": "^4.12.0",
+    "object-values": "^2.0.0",
+    "qs": "^6.7.0",
+    "react": "16.8",
+    "react-dom": "16.8",
+    "react-error-boundary": "^1.2.5",
+    "react-flip-toolkit": "^6.6.9",
+    "react-icons": "^3.7.0",
+    "react-modal": "^3.9.1",
+    "react-pose": "^4.0.8",
+    "react-redux": "^7.1.0",
+    "react-scripts": "3.0.1",
+    "react-transition-group": "^4.2.1",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-observable": "^1.1.0",
+    "rollbar": "^2.13.0",
+    "rxfire": "^3.5.1",
+    "rxjs": "^6.5.2",
+    "rxjs-hooks": "^0.5.1",
+    "typesafe-actions": "^4.4.2",
+    "typescript": "^3.5.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "homepage": "https://bacman.markspolakovs.me",
+  "devDependencies": {
+    "source-map-explorer": "^2.0.1"
+  }
+}

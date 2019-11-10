@@ -1,0 +1,312 @@
+$wat-colors: (
+  "type": rgb(221, 86, 86),
+  "subject": rgb(36, 218, 75),
+  "language": rgb(212, 52, 172),
+  "year": rgb(206, 166, 34),
+  "fileName": #727272
+);
+
+$enable-colors: true;
+
+@mixin mobile {
+  @media all and (max-width: 900px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media all and (min-width: 900px) {
+    @content;
+  }
+}
+
+@each $wat, $color in $wat-colors {
+  .#{$wat} {
+    color: if($enable-colors, $color, #565656);
+  }
+}
+
+.card {
+  &.error-state {
+    max-height: 8em;
+    background-color: #ffbfbf;
+  }
+  &.pending-state {
+    max-height: 8em;
+    background-color: #ffe6bf;
+  }
+  &.loading {
+    height: calc(64px + 1.2em);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  @include mobile {
+    width: 100%;
+  }
+  .grid {
+    display: grid;
+    grid-template: 1fr / 0.25fr 0.25fr 1fr 1fr 1fr 1fr 1fr;
+    @include mobile {
+      grid-template: 1fr 1fr min-content / 1fr 1fr;
+    }
+    grid-auto-rows: min-content;
+    .download-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include mobile {
+        justify-content: flex-start;
+        // grid-column: 1 / span 1;
+        grid-row: -1;
+      }
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      span {
+        $base-font: 1em;
+        @include mobile {
+          $base-font: 0.8em;
+        }
+        &.key {
+          color: #727272;
+          font-size: $base-font;
+        }
+        &.val {
+          @if not $enable-colors {
+            color: #212121;
+          }
+          font-size: $base-font * 1.2;
+        }
+        display: block;
+      }
+      margin: 0.6em;
+    }
+  }
+  padding: 0.5em;
+  @include mobile {
+    padding: 0.2em;
+  }
+  margin: 0.4em;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.06);
+  // display: flex;
+  // flex-direction: column;
+  transition: height 300ms;
+}
+
+.finder-picker {
+  margin: 2em;
+  width: 300px;
+  @include mobile {
+    margin: 0.3em 0.5em;
+    margin-left: 0;
+    // display: grid;
+    // grid-template: 1fr 1fr / 1fr 1fr;
+    font-size: 0.9em;
+  }
+  // font-style: italic;
+  // position: absolute;
+  // left: 1em;
+  // top: 8em;
+  .pickBox {
+    margin: 1em;
+    select {
+      margin: 0.3em;
+      padding: 0.2em;
+      border: none;
+      font-size: 0.95em;
+      display: block;
+      @if not $enable-colors {
+        color: rgb(52, 137, 212);
+      }
+    }
+  }
+}
+
+.App {
+  margin: 0 auto;
+  font-size: 1.2rem;
+  padding: 0.5em;
+}
+
+.subheader {
+  font-size: 95%;
+  color: #565656;
+}
+
+a {
+  color: rgb(52, 137, 212);
+}
+
+.btn {
+  $color: rgb(52, 137, 212);
+  display: inline-block;
+  flex-grow: 0;
+  text-decoration: none;
+  color: $color;
+  border: 1px solid $color;
+  padding: 0.4em 0.6em;
+  margin: 1.2em;
+  border-radius: 4%;
+  transition: 200ms background-color, 200ms color;
+  background-color: white;
+  &:hover {
+    background-color: $color;
+    color: white;
+  }
+}
+
+.big-btn {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+.big-ass-button {
+  $col: rgb(52, 137, 212);
+  display: block;
+  background-color: $col;
+  color: white;
+  padding: 0.7em;
+  margin: 0.5em;
+  border: none;
+  font-size: 1.5rem;
+  position: relative;
+  border: 2px solid white;
+  transition: 300ms all;
+  will-change: border;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: white;
+    opacity: 0;
+    will-change: width;
+  }
+  &.loading {
+    border: 2px solid $col;
+    &:before {
+      opacity: 1;
+      animation: 10s loader-width cubic-bezier(0, 0.9, 0.61, 0.93);
+    }
+  }
+}
+
+@keyframes loader-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+$loader-size: 64;
+
+.loader {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  svg {
+    width: $loader-size + px;
+    height: $loader-size + px;
+    circle {
+      stroke-dasharray: 3.14 * $loader-size;
+      stroke-dashoffset: ((3.14 / 4) * 3 * $loader-size);
+      transform-origin: (0.5px * $loader-size) (0.5px * $loader-size) 0;
+      animation: 4s loader infinite linear;
+    }
+  }
+}
+
+@keyframes loader {
+  0% {
+    stroke: map-get($wat-colors, "type");
+    transform: rotate(0);
+  }
+  25% {
+    stroke: map-get($wat-colors, "subject");
+  }
+  50% {
+    stroke: map-get($wat-colors, "language");
+  }
+  75% {
+    stroke: map-get($wat-colors, "year");
+  }
+  100% {
+    stroke: map-get($wat-colors, "type");
+    transform: rotate(1080deg);
+  }
+}
+
+.link-btn {
+  color: rgb(52, 137, 212);
+  background-color: transparent !important;
+  border: none;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.header {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-2-0 {
+  padding: 1em;
+  margin: 1em;
+  background-color: rgba(255, 119, 50, 0.5);
+}
+
+.app {
+  max-width: 1500px;
+  margin: 1em auto;
+  display: flex;
+  flex-direction: row;
+  @include mobile {
+    flex-direction: column;
+  }
+  .data,
+  & > .card {
+    flex-grow: 1;
+  }
+  .data {
+    position: relative;
+    .cards-container {
+      transition: 300ms transform;
+      &.loading {
+        transform: translateY(64px);
+      }
+      @include desktop {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+body {
+  margin-bottom: 60vh;
+}
+
+.desktop-only {
+  display: none;
+}
+@include desktop {
+  .desktop-only {
+    display: inline;
+  }
+  .mobile-only {
+    display: none !important;
+  }
+}
