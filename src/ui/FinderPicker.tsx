@@ -117,16 +117,6 @@ const PickBox: React.FC<{}> = () => {
       </button>
       {advanced && (
         <>
-          <div className="pickBox pickBox-LG">
-            <span>Include old past papers (before 2013)?</span>
-            <select
-              value={filters.includeLG ? "yes" : "no"}
-              onChange={e => change("includeLG", e.target.value === "yes")}
-            >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
           <div className="pickBox">
             <span>Show original file names?</span>
             <select
